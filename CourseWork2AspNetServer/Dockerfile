@@ -7,6 +7,7 @@ EXPOSE 443
 EXPOSE 5432
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+RUN dotnet dev-certs https --trust
 WORKDIR /src
 COPY ["CourseWork2AspNetServer/CourseWork2AspNetServer.csproj", "CourseWork2AspNetServer/"]
 RUN dotnet restore "CourseWork2AspNetServer/CourseWork2AspNetServer.csproj"
@@ -20,7 +21,5 @@ RUN dotnet publish "CourseWork2AspNetServer.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-RUN dotnet dev-certs https --trust
 
 ENTRYPOINT ["dotnet", "CourseWork2AspNetServer.dll"]
