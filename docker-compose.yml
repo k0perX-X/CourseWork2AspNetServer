@@ -2,6 +2,8 @@ version: '3.8'
 
 services:
   coursework2aspnetserver:
+    depends_on:
+      - db
     image: ${DOCKER_REGISTRY-}coursework2aspnetserver
     build:
       context: .
