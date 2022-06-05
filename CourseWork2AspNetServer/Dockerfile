@@ -7,7 +7,8 @@ EXPOSE 443
 EXPOSE 5432
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-RUN dotnet dev-certs https --trust
+RUN dotnet dev-certs https --clean
+RUN dotnet dev-certs https -t
 WORKDIR /src
 COPY ["CourseWork2AspNetServer/CourseWork2AspNetServer.csproj", "CourseWork2AspNetServer/"]
 RUN dotnet restore "CourseWork2AspNetServer/CourseWork2AspNetServer.csproj"
