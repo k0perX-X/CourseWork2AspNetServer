@@ -12,7 +12,7 @@ namespace CourseWork2AspNetServer.Models
         [Required] public DateTime Birthdate { get; set; }
         [Required] public string Email { get; set; }
         [Required] public string Password { get; set; }
-        public List<Procedure> Procedures { get; set; }
+        public List<PatientProcedure> Procedures { get; set; }
         public List<WellBeingRecord> WellBeingRecords { get; set; }
         public List<TakenMedication> TakenMedications { get; set; }
         public List<PatientsDrug> PatientsDrugs { get; set; }
@@ -25,6 +25,9 @@ namespace CourseWork2AspNetServer.Models
         [Key] [Required] public string Token { get; set; }
         public string? OtherInformation { get; set; }
         [Required] public DateTime CreateTime { get; set; }
+        [Required] public string DeviceInformation { get; set; }
+        [Required] public Patient Patient { get; set; }
+        [Required] public int PatientId { get; set; }
     }
 
     public class PatientsDrug

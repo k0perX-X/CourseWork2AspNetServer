@@ -98,7 +98,8 @@ namespace CourseWork2AspNetServer.Migrations
                     Token = table.Column<string>(type: "text", nullable: false),
                     OtherInformation = table.Column<string>(type: "text", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    PatientId = table.Column<int>(type: "integer", nullable: true)
+                    DeviceInformation = table.Column<string>(type: "text", nullable: false),
+                    PatientId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +108,8 @@ namespace CourseWork2AspNetServer.Migrations
                         name: "FK_OAuths_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

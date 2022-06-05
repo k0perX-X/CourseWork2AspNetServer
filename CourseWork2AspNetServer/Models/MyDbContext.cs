@@ -1,28 +1,30 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace CourseWork2AspNetServer.Models
 {
     public class MyDbContext : DbContext
     {
-        DbSet<Patient> Patients { get; set; }
-        DbSet<PatientsDrug> PatientsDrugs { get; set; }
-        DbSet<Drug> Drugs { get; set; }
-        DbSet<TakenMedication> TakenMedications { get; set; }
-        DbSet<DoctorsAppointment> DoctorsAppointments { get; set; }
-        DbSet<Doctor> Doctors { get; set; }
-        DbSet<PrescribedMedication> PrescribedMedications { get; set; }
-        DbSet<PatientProcedure> PatientProcedures { get; set; }
-        DbSet<Procedure> Procedures { get; set; }
-        DbSet<WellBeingRecord> WellBeingRecords { get; set; }
-        DbSet<OAuth> OAuths { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<PatientsDrug> PatientsDrugs { get; set; }
+        public DbSet<Drug> Drugs { get; set; }
+        public DbSet<TakenMedication> TakenMedications { get; set; }
+        public DbSet<DoctorsAppointment> DoctorsAppointments { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<PrescribedMedication> PrescribedMedications { get; set; }
+        public DbSet<PatientProcedure> PatientProcedures { get; set; }
+        public DbSet<Procedure> Procedures { get; set; }
+        public DbSet<WellBeingRecord> WellBeingRecords { get; set; }
+        public DbSet<OAuth> OAuths { get; set; }
 
         //public string DbPath { get; }
         public MyDbContext()
         {
             //var folder = Environment.SpecialFolder.LocalApplicationData;
             //var path = Environment.GetFolderPath(folder);
-            //DbPath = System.IO.Path.Join(path, "test.db");
+            //DbPath = System.IO.Path.Join(path, "Test.db");
             //Database.EnsureCreated();
+            SaveChangesTask = new Task(() => SaveChanges());
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -47,5 +49,7 @@ namespace CourseWork2AspNetServer.Models
             //optionsBuilder.UseSqlite($"Data Source={DbPath}");
             optionsBuilder.UseNpgsql(ConnectionStringClass.ConnectionString);
         }
+
+        public Task SaveChangesTask;
     }
 }

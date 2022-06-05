@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  coursework2aspnetserver:
+    image: ${DOCKER_REGISTRY-}coursework2aspnetserver
+    build:
+      context: .
+      dockerfile: CourseWork2AspNetServer/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    links: 
+      - "db:database"
+    restart: always
+  
+  db:
+    image: postgres
+    restart: always
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    external: true

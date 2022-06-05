@@ -122,10 +122,14 @@ namespace CourseWork2AspNetServer.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("DeviceInformation")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("OtherInformation")
                         .HasColumnType("text");
 
-                    b.Property<int?>("PatientId")
+                    b.Property<int>("PatientId")
                         .HasColumnType("integer");
 
                     b.HasKey("Token");
@@ -373,9 +377,13 @@ namespace CourseWork2AspNetServer.Migrations
 
             modelBuilder.Entity("CourseWork2AspNetServer.Models.OAuth", b =>
                 {
-                    b.HasOne("CourseWork2AspNetServer.Models.Patient", null)
+                    b.HasOne("CourseWork2AspNetServer.Models.Patient", "Patient")
                         .WithMany("Tokens")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
                 });
 
             modelBuilder.Entity("CourseWork2AspNetServer.Models.PatientProcedure", b =>
