@@ -8,12 +8,23 @@ services:
     build:
       context: .
       dockerfile: CourseWork2AspNetServer/Dockerfile
+    restart: always
+    links: 
+      - "db:database"
     ports:
       - "80:80"
       - "443:443"
-    links: 
-      - "db:database"
-    restart: always
+    #ports:
+    ## Replace the values on the left by the values on your launchSettings.json
+    #  - "51217:80"
+    #  - "44349:443"
+    #environment:
+    #  ASPNETCORE_ENVIRONMENT: "Development"
+    #  ASPNETCORE_URLS: "https://+;http://+"
+    #  ASPNETCORE_HTTPS_PORT: "44349"
+    #volumes:
+    #  - "${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets"
+    #  - "${HOME}/.aspnet/https:/root/.aspnet/https/"
   
   db:
     image: postgres
