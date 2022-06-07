@@ -13,7 +13,7 @@ services:
       - "db:database"
     ports:
       - "80:80"
-      - "443:443"
+      #- "443:443"
     #ports:
     ## Replace the values on the left by the values on your launchSettings.json
     #  - "51217:80"
